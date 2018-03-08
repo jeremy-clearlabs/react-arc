@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { ConfirmModal } from 'components'
 
-storiesOf('ConfirmModal', module)
+storiesOf('Organisms/ConfirmModal', module)
   .add('default', () => (
     <ConfirmModal
       name="confirm"

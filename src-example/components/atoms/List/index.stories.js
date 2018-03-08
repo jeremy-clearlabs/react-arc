@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import List from '.'
 
-storiesOf('List', module)
+storiesOf('Atoms/List', module)
   .add('default', () => (
     <List>
       <li>Item 1</li>

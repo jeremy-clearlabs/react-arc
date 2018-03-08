@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Organism } from 'components'
 
-storiesOf('Organism', module)
+storiesOf('Organisms/Organism', module)
   .add('default', () => (
     <Organism />
   ))

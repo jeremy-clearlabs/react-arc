@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Tooltip from '.'
 
-storiesOf('Tooltip', module)
+storiesOf('Atoms/Tooltip', module)
   .add('default', () => (
     <div style={{ margin: 100 }}>
       <Tooltip data-title="Hello">

@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Table } from 'components'
 
-storiesOf('Table', module)
+storiesOf('Molecules/Table', module)
   .add('default', () => (
     <Table>
       <tr>

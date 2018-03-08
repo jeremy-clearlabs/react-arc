@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import PreformattedText from '.'
 
-storiesOf('PreformattedText', module)
+storiesOf('Atoms/PreformattedText', module)
   .add('default', () => (
     <PreformattedText>git clone https://github.com/diegohaz/arc</PreformattedText>
   ))

@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { IconButton } from 'components'
 
-storiesOf('IconButton', module)
+storiesOf('Molecules/IconButton', module)
   .add('default', () => (
     <IconButton icon="close">Hello</IconButton>
   ))

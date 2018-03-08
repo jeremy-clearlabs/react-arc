@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import TableRow from '.'
 
-storiesOf('TableRow', module)
+storiesOf('Atoms/TableRow', module)
   .add('default', () => (
     <table>
       <thead>

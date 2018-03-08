@@ -38,8 +38,8 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.0.0",
-    "@storybook/react": "^3.0.0",
+    "@storybook/addon-actions": "^3.3.15",
+    "@storybook/react": "^3.3.15",
     "@webpack-blocks/assets": "^1.0.0-rc",
     "@webpack-blocks/babel": "^1.0.0-rc",
     "@webpack-blocks/dev-server": "^1.0.0-rc",

@@ -9,7 +9,7 @@ const list = [
   { id: 3, title: 'Post 1', body: 'Voluptate ullamco anim exercitation deserunt cillum ullamco.' },
 ]
 
-storiesOf('PostList', module)
+storiesOf('Organisms/PostList', module)
   .add('default', () => (
     <PostList list={list} />
   ))

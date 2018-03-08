@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Label from '.'
 
-storiesOf('Label', module)
+storiesOf('Atoms/Label', module)
   .add('default', () => (
     <Label>Hello</Label>
   ))

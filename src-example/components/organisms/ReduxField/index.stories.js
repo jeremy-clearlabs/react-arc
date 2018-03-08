@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { ReduxField } from 'components'
 
-storiesOf('ReduxField', module)
+storiesOf('Organisms/ReduxField', module)
   .add('default', () => (
     <ReduxField input={{ name: 'name' }} meta={{}} />
   ))

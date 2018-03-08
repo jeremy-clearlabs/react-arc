@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { PrimaryNavigation } from 'components'
 
-storiesOf('PrimaryNavigation', module)
+storiesOf('Molecules/PrimaryNavigation', module)
   .add('default', () => (
     <PrimaryNavigation />
   ))

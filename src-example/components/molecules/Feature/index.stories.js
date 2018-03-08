@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Feature } from 'components'
 
-storiesOf('Feature', module)
+storiesOf('Molecules/Feature', module)
   .add('default', () => (
     <Feature title="ARc">
       Ullamco duis in labore consectetur ad exercitation esse esse duis mollit sint.

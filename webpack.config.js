@@ -1,16 +1,18 @@
-// https://github.com/diegohaz/arc/wiki/Webpack
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const devServer = require('@webpack-blocks/dev-server')
-// const splitVendor = require('webpack-blocks-split-vendor')
-// const happypack = require('webpack-blocks-happypack')
-const babel = require('@webpack-blocks/babel')
 const { css, file, url } = require('@webpack-blocks/assets')
-
+const babel = require('@webpack-blocks/babel')
+const devServer = require('@webpack-blocks/dev-server')
 const {
-  addPlugins, createConfig, entryPoint, env, setOutput,
-  sourceMaps, defineConstants, match,
+  addPlugins,
+  createConfig,
+  entryPoint,
+  env,
+  setOutput,
+  sourceMaps,
+  defineConstants,
+  match,
 } = require('@webpack-blocks/webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 const host = process.env.HOST || 'localhost'

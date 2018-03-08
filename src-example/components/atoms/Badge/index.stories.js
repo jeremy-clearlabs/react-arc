@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Badge from '.'
 
-storiesOf('Badge', module)
+storiesOf('Atoms/Badge', module)
   .add('default', () => (
     <Badge>Hello</Badge>
   ))

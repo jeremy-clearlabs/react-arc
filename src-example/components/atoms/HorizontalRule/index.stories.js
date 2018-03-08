@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import HorizontalRule from '.'
 
-storiesOf('HorizontalRule', module)
+storiesOf('Atoms/HorizontalRule', module)
   .add('default', () => (
     <HorizontalRule />
   ))
