@@ -7,7 +7,7 @@
     "build:copy": "copyfiles -u 1 public/* public/**/* dist",
     "build": "npm run env:prod -- webpack",
     "coverage": "npm test -- --coverage",
-    "dev": "npm run env:dev -- webpack-dev-server",
+    "dev": "npm run env:dev -- webpack-dev-server --watch-content-base --open",
     "env:dev": "cross-env NODE_ENV=development",
     "env:prod": "cross-env NODE_ENV=production",
     "lint": "eslint src private webpack.config.js",
