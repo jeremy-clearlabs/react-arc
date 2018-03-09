@@ -5,26 +5,21 @@
   "scripts": {
     "build:clean": "rimraf \"dist/!(.git*|Procfile)**\"",
     "build:copy": "copyfiles -u 1 public/* public/**/* dist",
-    "build:example": "npm run env:example -- npm run build",
     "build": "npm run env:prod -- webpack",
     "coverage": "npm test -- --coverage",
-    "dev:example": "npm run env:example -- npm run dev",
     "dev": "npm run env:dev -- webpack-dev-server",
     "env:dev": "cross-env NODE_ENV=development",
-    "env:example": "cross-env SOURCE=src-example",
     "env:prod": "cross-env NODE_ENV=production",
-    "lint": "eslint src src-example private webpack.config.js",
+    "lint": "eslint src private webpack.config.js",
     "postcoverage": "opn coverage/lcov-report/index.html",
     "prebuild": "npm run build:clean && npm run build:copy",
     "start": "npm run dev",
-    "storybook:example": "npm run env:example -- npm run storybook",
     "storybook": "start-storybook -p 9001 -c private/storybook",
     "test": "jest"
   },
   "jest": {
     "moduleDirectories": [
       "src",
-      "src-example",
       "node_modules"
     ],
     "moduleNameMapper": {
