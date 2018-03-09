@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { injectGlobal, ThemeProvider } from 'styled-components'
-
 import { HomePage, SamplePage, NotFoundPage } from 'components'
 import { GoogleTagManager } from 'containers'
 

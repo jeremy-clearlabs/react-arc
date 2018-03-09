@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import theme from './default'
 
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+const randStr = () => Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
 
 storiesOf('Themes', module)
   .add('Headings', () => (
@@ -30,12 +31,12 @@ storiesOf('Themes', module)
   ))
   .add('colors', () => (
     <div>
-      {Object.keys(theme.palette).map((kind, kindIndex) => (
-        <section key={kindIndex}>
+      {Object.keys(theme.palette).map(kind => (
+        <section key={randStr()}>
           <div>{kind}</div>
           <ul>
-            {theme.palette[kind].map((color, paletteIndex) => (
-              <li key={paletteIndex}>
+            {theme.palette[kind].map(color => (
+              <li key={randStr()}>
                 <div>
                   <div style={{ width: 50, height: 50, backgroundColor: color }} />
                   <div>{color}</div>
