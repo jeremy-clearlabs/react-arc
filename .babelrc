@@ -13,6 +13,7 @@
     "development": {
       "plugins": [
         "transform-es2015-modules-commonjs",
+        "syntax-dynamic-import",
         ["styled-components", {
           "minify": false
         }]
@@ -20,12 +21,14 @@
     },
     "test": {
       "plugins": [
-        "transform-es2015-modules-commonjs"
+        "transform-es2015-modules-commonjs",
+        "syntax-dynamic-import"
       ]
     },
     "production": {
       "plugins": [
         "transform-react-remove-prop-types",
+        "syntax-dynamic-import",
         ["styled-components", {
           "displayName": false
         }]
