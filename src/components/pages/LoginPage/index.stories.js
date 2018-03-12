@@ -1,9 +1,9 @@
 // https://github.com/diegohaz/arc/wiki/Storybook
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { HomePage } from 'components'
+import { LoginPage } from 'components'
 
-storiesOf('Pages/HomePage', module)
+storiesOf('Pages/LoginPage', module)
   .add('default', () => (
-    <HomePage />
+    <LoginPage />
   ))
