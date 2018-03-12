@@ -8,7 +8,11 @@ export default (state = initialState, { type, payload }) => {
     case AUTH_LOGIN_SUCCESS:
       return {
         ...state,
-        user: payload,
+        user: {
+          // ...payload,
+          token: payload.token,
+          isAuthenticated: true
+        },
       }
     case AUTH_LOGOUT:
       return {

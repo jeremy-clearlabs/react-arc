@@ -5,18 +5,23 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
 
 import { basename } from 'config'
 import configureStore from 'store/configure'
 import api from 'services/api'
 import App from 'components/App'
 
-const store = configureStore({}, { api: api.create() })
+const history = createHistory()
+const store = configureStore({}, { api: api.create() }, history)
 
 const renderApp = () => (
   <Provider store={store}>
     <BrowserRouter basename={basename}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </BrowserRouter>
   </Provider>
 )
