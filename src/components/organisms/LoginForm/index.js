@@ -15,8 +15,8 @@ const LoginForm = ({ handleSubmit, submitting }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Heading level={2}>Login</Heading>
-      <Field name="username" label="Username" type="text" component={ReduxField} />
-      <Field name="password" label="Password" type="password" component={ReduxField} />
+      <Field name="username" placeholder="Username" type="text" component={ReduxField} />
+      <Field name="password" placeholder="Password" type="password" component={ReduxField} />
       <Button type="submit" disable={submitting}>Login</Button>
     </Form>
   )

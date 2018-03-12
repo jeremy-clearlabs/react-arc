@@ -9,6 +9,9 @@ storiesOf('Molecules/Field', module)
   .add('with label', () => (
     <Field name="field" label="Label" />
   ))
+  .add('with placeholder', () => (
+    <Field name="field" placeholder="This is Placeholder" />
+  ))
   .add('invalid', () => (
     <Field name="field" label="Label" invalid />
   ))
