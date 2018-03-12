@@ -22,4 +22,13 @@ const LoginForm = ({ handleSubmit, submitting }) => {
   )
 }
 
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool
+}
+
+LoginForm.defaultProps = {
+  handleSubmit: () => {}
+}
+
 export default LoginForm

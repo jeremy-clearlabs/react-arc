@@ -2,24 +2,21 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import LoginForm from '.'
 
-const onFacebookLogin = jest.fn()
-const onGoogleLogin = jest.fn()
-const onClose = jest.fn()
+const handleSubmit = jest.fn()
 
-const wrap = (props = {}) =>
-  shallow(<LoginForm {...{ onFacebookLogin, onGoogleLogin, onClose }} {...props} />)
+const wrap = (props = {}) => shallow(<LoginForm handleSubmit={handleSubmit} {...props} />)
 
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('calls renderSubmit when submitted', () => {
+  handleSubmit.mockClear()
+  const wrapper = wrap()
+  expect(handleSubmit).not.toBeCalled()
+  wrapper.simulate('submit')
+  expect(handleSubmit).toBeCalled()
 })
 
-it('calls onClose when user passed in', () => {
-  onClose.mockClear()
+it('disables button while submitting', () => {
   const wrapper = wrap()
-  expect(onClose).not.toBeCalled()
-  wrapper.setProps({ user: {} })
-  expect(onClose).toHaveBeenCalledTimes(1)
-  wrapper.setProps({ user: null })
-  expect(onClose).toHaveBeenCalledTimes(1)
+  expect(wrapper.find({ disabled: true }).length).toBe(0)
+  wrapper.setProps({ submitting: true })
+  expect(wrapper.find({ disabled: true })).toHaveLength(1)
 })
