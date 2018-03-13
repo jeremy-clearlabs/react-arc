@@ -4,16 +4,16 @@ import * as actions from './actions'
 export const authAction = suffix => ({ type, payload }) =>
   type === `AUTH_LOGIN_${suffix}` && payload
 
-export function* loginAuthService(api, options = {}) {
+export function* loginAuthService(api, options = {}, meta) {
   const request = options
 
   try {
     const data = yield call([api, api.post], '/login', request)
     console.log('data', data);
-    yield put(actions.authLoginSuccess(data, request))
+    yield put(actions.authLoginSuccess(data, meta))
   } catch (e) {
     console.log('e', e);
-    yield put(actions.authLoginFailure(e, request))
+    yield put(actions.authLoginFailure(e, meta))
   }
 }
 

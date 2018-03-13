@@ -7,27 +7,22 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 export const authLoginRequest = (options = {}) => ({
   type: AUTH_LOGIN_REQUEST,
   payload: options,
-  // meta: {
-  //   // https://github.com/diegohaz/arc/wiki/Example-redux-modules#gtm
-  //   gtm: service,
-  // },
+  meta: {
+    thunk: true
+  },
 })
 
-export const authLoginSuccess = (user, request) => ({
+export const authLoginSuccess = (user, meta) => ({
   type: AUTH_LOGIN_SUCCESS,
   payload: user,
-  // meta: {
-  //   request,
-  // },
+  meta,
 })
 
-export const authLoginFailure = (error, request) => ({
+export const authLoginFailure = (error, meta) => ({
   type: AUTH_LOGIN_FAILURE,
   error: true,
   payload: error,
-  // meta: {
-  //   request,
-  // },
+  meta,
 })
 
 export const authLogout = () => ({ type: AUTH_LOGOUT })

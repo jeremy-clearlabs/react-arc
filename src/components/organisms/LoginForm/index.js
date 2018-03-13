@@ -16,7 +16,10 @@ class LoginForm extends Component {
     handleSubmit: PropTypes.func.isRequired,
     onAuthRedirect: PropTypes.func.isRequired,
     submitting: PropTypes.bool,
+    loading: PropTypes.bool,
+    failed: PropTypes.bool,
     user: PropTypes.object,
+    errorMessage: PropTypes.string
   }
 
   static defaultProps = {
@@ -30,13 +33,16 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props
+    const { handleSubmit, loading, failed, errorMessage } = this.props
     return (
       <Form onSubmit={handleSubmit}>
         <Heading level={2}>Login</Heading>
+        {failed ? (
+          <div>{errorMessage}</div>
+        ) : null}
         <Field name="username" label="Username" type="text" component={ReduxField} />
         <Field name="password" label="Password" type="password" component={ReduxField} />
-        <Button type="submit" disable={submitting}>Login</Button>
+        <Button type="submit" disable={loading}>Login</Button>
       </Form>
     )
   }

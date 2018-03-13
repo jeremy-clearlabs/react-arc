@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { authLoginRequest } from 'store/actions'
+import { pending, rejected } from 'redux-saga-thunk'
+import { authLoginRequest, AUTH_LOGIN_REQUEST } from 'store/actions'
 import { createValidator, required } from 'services/validation'
 import { push } from 'react-router-redux'
 
@@ -19,6 +20,9 @@ const validate = createValidator({
 
 const mapStateToProps = state => ({
   user: fromAuth.getUser(state),
+  loading: pending(state, AUTH_LOGIN_REQUEST),
+  failed: rejected(state, AUTH_LOGIN_REQUEST),
+  errorMessage: fromAuth.getAuthError(state),
 })
 
 const mapDispatchToProps = dispatch => ({
