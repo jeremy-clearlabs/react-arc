@@ -14,6 +14,19 @@
 </p>
 <br />
 
+## Deployment
+
+Create Docker image for user-interface
+
+```bash
+docker build . -t gcr.io/clearview-dev/user-interface
+```
+
+Push to GCP Registry
+```bash
+gcloud docker -- push gcr.io/clearview-dev/user-interface
+```
+
 ## `redux`
 
 - **[Demo](https://arc.js.org)**
