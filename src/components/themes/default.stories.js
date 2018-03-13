@@ -28,23 +28,23 @@ storiesOf('Themes', module)
     </div>
   ))
   .add('colors', () => (
-    <div>
+    <Block>
       {Object.keys(theme.palette).map(kind => (
-        <section key={randStr()}>
-          <div>{kind}</div>
+        <Block key={randStr()}>
+          <Heading>{kind}</Heading>
           <ul>
             {theme.palette[kind].map(color => (
               <li key={randStr()}>
-                <div>
-                  <div style={{ width: 50, height: 50, backgroundColor: color }} />
-                  <div>{color}</div>
-                </div>
+                <Block>
+                  <Block style={{ width: 50, height: 50, backgroundColor: color }} />
+                  <Label>{color}</Label>
+                </Block>
               </li>
             ))}
           </ul>
-        </section>
+        </Block>
       ))}
-    </div>
+    </Block>
   ))
 //   .add('reverse', () => (
 //     <Atom reverse>Hello</Atom>
