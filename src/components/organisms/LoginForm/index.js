@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
 
-import { Button, ReduxField, Heading } from 'components'
+import { Alert, Button, ReduxField, Heading } from 'components'
 
 const Form = styled.form`
   width: 100%;
@@ -38,7 +38,7 @@ class LoginForm extends Component {
       <Form onSubmit={handleSubmit}>
         <Heading level={2}>Login</Heading>
         {failed ? (
-          <div>{errorMessage}</div>
+          <Alert dismissable type="danger">{errorMessage}</Alert>
         ) : null}
         <Field name="username" label="Username" type="text" component={ReduxField} />
         <Field name="password" label="Password" type="password" component={ReduxField} />
