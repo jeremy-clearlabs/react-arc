@@ -16,11 +16,11 @@ const Wrapper = styled.div`
   background-color: ${palette('grayscale', 8)};
   border-color: ${palette('grayscale', 0)};
   ${props =>
-    props.type &&
+    props.variant &&
     css`
-      color: ${palette(props.type, 1)};
-      background-color: ${palette(props.type, 2)};
-      border-color: ${palette(props.type, 2)};
+      color: ${palette(props.variant, 1)};
+      background-color: ${palette(props.variant, 2)};
+      border-color: ${palette(props.variant, 2)};
     `};
 `;
 
@@ -39,7 +39,7 @@ class Alert extends Component {
     children: PropTypes.node,
     dismissable: PropTypes.bool,
     onClose: PropTypes.func,
-    type: PropTypes.oneOf([
+    variant: PropTypes.oneOf([
       'primary',
       'secondary',
       'success',
@@ -65,15 +65,15 @@ class Alert extends Component {
   shouldBeClosed = () => !this.state.isOpen
 
   render() {
-    const { children, dismissable, type, ...props } = this.props;
+    const { children, dismissable, variant, ...props } = this.props;
     return this.shouldBeClosed() ? null : (
-      <Wrapper type={type} role="alert" {...props}>
+      <Wrapper variant={variant} role="alert" {...props}>
         <StyledBlock dismissable={dismissable}>
           {children}
           {dismissable && (
             <IconButton
               icon="close"
-              palette={type || 'white'}
+              palette={variant || 'white'}
               reverse
               right
               aria-label="Close"
