@@ -1,6 +1,6 @@
 // https://github.com/diegohaz/arc/wiki/Sagas#unit-testing-sagas
-// https://github.com/diegohaz/arc/wiki/Example-redux-modules#resource
-import { put, call, takeEvery } from 'redux-saga/effects'
+// https://github.com/diegohaz/arc/wiki/Example-redux-modules#social
+import { fork, take } from 'redux-saga/effects'
 import * as actions from './actions'
 import saga, * as sagas from './sagas'
 
@@ -11,154 +11,102 @@ const api = {
   delete: () => {},
 }
 
-const thunk = '123'
-const resource = 'resources'
-const meta = { thunk, resource }
-
-describe('createResource', () => {
-  const payload = { data: 'foo' }
-
-  it('calls success', () => {
-    const detail = 'detail'
-    const generator = sagas.createResource(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.post], `/${resource}`, 'foo'))
-    expect(generator.next(detail).value)
-      .toEqual(put(actions.resourceCreateSuccess(resource, detail, payload, thunk)))
-  })
-
-  it('calls failure', () => {
-    const generator = sagas.createResource(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.post], `/${resource}`, 'foo'))
-    expect(generator.throw('test').value)
-      .toEqual(put(actions.resourceCreateFailure(resource, 'test', payload, thunk)))
-  })
+test('authAction', () => {
+  const action = suffix => ({ type: `AUTH_LOGIN_${suffix}`, payload: { foo: 'bar' } })
+  expect(sagas.authAction('REQUEST')(action('REQUEST'))).toEqual({ foo: 'bar' })
 })
 
-describe('readResourceList', () => {
-  const payload = { params: { _limit: 1 } }
+// describe('loginAuthService', () => {
+//   const request = {
+//     service: 'facebook',
+//     scope: 'public_profile',
+//     fields: 'id,name',
+//   }
 
-  it('calls success', () => {
-    const detail = [1, 2, 3]
-    const generator = sagas.readResourceList(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.get], `/${resource}`, payload))
-    expect(generator.next(detail).value)
-      .toEqual(put(actions.resourceListReadSuccess(resource, detail, payload, thunk)))
-  })
+//   it('calls success', () => {
+//     const generator = sagas.loginFacebook()
+//     expect(generator.next().value)
+//       .toEqual(call(sagas.promises.fbLogin, { scope: 'public_profile' }))
+//     expect(generator.next().value).toEqual(call(sagas.promises.fbGetMe, { fields: 'id,name' }))
+//     expect(generator.next({ id: '123', name: 'name' }).value)
+//       .toEqual(put(actions.socialLoginSuccess({
+//         id: '123',
+//         name: 'name',
+//         picture: 'https://graph.facebook.com/123/picture?type=normal',
+//       }, request)))
+//   })
 
-  it('calls failure', () => {
-    const generator = sagas.readResourceList(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.get], `/${resource}`, payload))
-    expect(generator.throw('test').value)
-      .toEqual(put(actions.resourceListReadFailure(resource, 'test', payload, thunk)))
-  })
-})
+//   it('calls failure', () => {
+//     const generator = sagas.loginFacebook()
+//     expect(generator.next().value)
+//       .toEqual(call(sagas.promises.fbLogin, { scope: 'public_profile' }))
+//     expect(generator.throw('test').value)
+//       .toEqual(put(actions.socialLoginFailure('test', request)))
+//   })
+// })
 
-describe('readResourceDetail', () => {
-  const payload = { needle: 1 }
+// test('watchSocialLoginFacebook', () => {
+//   const payload = { foo: 'bar' }
+//   const generator = sagas.watchSocialLoginFacebook()
+//   generator.next()
+//   expect(generator.next({ payload }).value).toEqual(call(sagas.prepareFacebook, payload))
+//   generator.next()
+//   expect(generator.next({ payload }).value).toEqual(call(sagas.loginFacebook, payload))
+// })
 
-  it('calls success', () => {
-    const detail = 'foo'
-    const generator = sagas.readResourceDetail(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.get], `/${resource}/1`))
-    expect(generator.next(detail).value)
-      .toEqual(put(actions.resourceDetailReadSuccess(resource, detail, payload, thunk)))
-  })
+// describe('loginGoogle', () => {
+//   const request = { service: 'google', scope: 'profile' }
 
-  it('calls failure', () => {
-    const generator = sagas.readResourceDetail(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.get], `/${resource}/1`))
-    expect(generator.throw('test').value)
-      .toEqual(put(actions.resourceDetailReadFailure(resource, 'test', payload, thunk)))
-  })
-})
+//   it('calls success', () => {
+//     const generator = sagas.loginGoogle()
+//     expect(generator.next().value).toEqual(call(window.gapi.auth2.getAuthInstance))
+//     expect(generator.next(auth2).value)
+//       .toEqual(call([auth2, auth2.signIn], { scope: 'profile' }))
+//     expect(generator.next(user).value).toEqual(call([user, user.getBasicProfile]))
+//     expect(generator.next(profile).value).toEqual(call([profile, profile.getName]))
+//     expect(generator.next('name').value).toEqual(call([profile, profile.getImageUrl]))
+//     expect(generator.next('imageUrl').value)
+//       .toEqual(put(actions.socialLoginSuccess({ name: 'name', picture: 'imageUrl' }, request)))
+//   })
 
-describe('updateResource', () => {
-  const payload = { needle: 1, data: 'foo' }
+//   it('calls failure', () => {
+//     const generator = sagas.loginGoogle()
+//     expect(generator.next().value).toEqual(call(window.gapi.auth2.getAuthInstance))
+//     expect(generator.throw('test').value)
+//       .toEqual(put(actions.socialLoginFailure('test', request)))
+//   })
+// })
 
-  it('calls success', () => {
-    const detail = 'foo'
-    const generator = sagas.updateResource(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.put], `/${resource}/1`, 'foo'))
-    expect(generator.next(detail).value)
-      .toEqual(put(actions.resourceUpdateSuccess(resource, detail, payload, thunk)))
-  })
+// describe('prepareGoogle', () => {
+//   const payload = { clientId: 'test', foo: 'bar' }
 
-  it('calls failure', () => {
-    const generator = sagas.updateResource(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.put], `/${resource}/1`, 'foo'))
-    expect(generator.throw('test').value)
-      .toEqual(put(actions.resourceUpdateFailure(resource, 'test', payload, thunk)))
-  })
-})
+//   it('calls success', () => {
+//     const generator = sagas.prepareGoogle(payload)
+//     expect(generator.next().value)
+//       .toEqual(call(loadScript, '//apis.google.com/js/platform.js'))
+//     expect(generator.next().value).toEqual(call(sagas.promises.loadGoogleAuth2))
+//     expect(generator.next().value)
+//       .toEqual(call(window.gapi.auth2.init, { client_id: 'test', foo: 'bar' }))
+//   })
 
-describe('deleteResource', () => {
-  const payload = { needle: 1 }
+//   it('calls failure', () => {
+//     const generator = sagas.prepareGoogle(payload)
+//     expect(generator.next().value)
+//       .toEqual(call(loadScript, '//apis.google.com/js/platform.js'))
+//     expect(generator.throw('test').value)
+//       .toEqual(put(actions.socialLoginFailure('test', { service: 'google', ...payload })))
+//   })
+// })
 
-  it('calls success', () => {
-    const generator = sagas.deleteResource(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.delete], `/${resource}/1`))
-    expect(generator.next().value)
-      .toEqual(put(actions.resourceDeleteSuccess(resource, payload, thunk)))
-  })
-
-  it('calls failure', () => {
-    const generator = sagas.deleteResource(api, payload, meta)
-    expect(generator.next().value)
-      .toEqual(call([api, api.delete], `/${resource}/1`))
-    expect(generator.throw('test').value)
-      .toEqual(put(actions.resourceDeleteFailure(resource, 'test', payload, thunk)))
-  })
-})
-
-test('watchResourceCreateRequest', () => {
-  const payload = { data: 1 }
-  const generator = sagas.watchResourceCreateRequest(api, { payload, meta })
-  expect(generator.next().value)
-    .toEqual(call(sagas.createResource, api, payload, meta))
-})
-
-test('watchResourceListReadRequest', () => {
-  const payload = { params: { _limit: 1 } }
-  const generator = sagas.watchResourceListReadRequest(api, { payload, meta })
-  expect(generator.next().value)
-    .toEqual(call(sagas.readResourceList, api, payload, meta))
-})
-
-test('watchResourceDetailReadRequest', () => {
-  const payload = { needle: 1 }
-  const generator = sagas.watchResourceDetailReadRequest(api, { payload, meta })
-  expect(generator.next().value)
-    .toEqual(call(sagas.readResourceDetail, api, payload, meta))
-})
-
-test('watchResourceUpdateRequest', () => {
-  const payload = { needle: 1, data: { id: 1 } }
-  const generator = sagas.watchResourceUpdateRequest(api, { payload, meta })
-  expect(generator.next().value)
-    .toEqual(call(sagas.updateResource, api, payload, meta))
-})
-
-test('watchResourceDeleteRequest', () => {
-  const payload = { needle: 1 }
-  const generator = sagas.watchResourceDeleteRequest(api, { payload, meta })
-  expect(generator.next({ payload, meta }).value)
-    .toEqual(call(sagas.deleteResource, api, payload, meta))
+test('watchAuthLogin', () => {
+  const generator = sagas.watchAuthLogin(api)
+  // generator.next()
+  expect(generator.next().value).toEqual(take(sagas.authAction, 'REQUEST'))
+  // generator.next()
+  // expect(generator.next({ payload }).value).toEqual(call(sagas.loginGoogle, payload))
 })
 
 test('saga', () => {
   const generator = saga({ api })
-  expect(generator.next().value).toEqual(takeEvery(actions.RESOURCE_CREATE_REQUEST, sagas.watchResourceCreateRequest, api))
-  expect(generator.next().value).toEqual(takeEvery(actions.RESOURCE_LIST_READ_REQUEST, sagas.watchResourceListReadRequest, api))
-  expect(generator.next().value).toEqual(takeEvery(actions.RESOURCE_DETAIL_READ_REQUEST, sagas.watchResourceDetailReadRequest, api))
-  expect(generator.next().value).toEqual(takeEvery(actions.RESOURCE_UPDATE_REQUEST, sagas.watchResourceUpdateRequest, api))
-  expect(generator.next().value).toEqual(takeEvery(actions.RESOURCE_DELETE_REQUEST, sagas.watchResourceDeleteRequest, api))
+  expect(generator.next().value).toEqual(fork(sagas.watchAuthLogin, api))
 })

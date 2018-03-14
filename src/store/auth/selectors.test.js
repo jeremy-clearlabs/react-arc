@@ -3,39 +3,28 @@
 import * as selectors from './selectors'
 
 const altState = {
-  resources: {
-    list: [1, 2, 3],
-    detail: 1,
+  user: {
+    token: 'abcdefg',
+    isAuthenticated: true
   },
+  auth: {
+    errorMessage: null
+  }
 }
 
 test('initialState', () => {
-  expect(selectors.initialState).toEqual({})
+  expect(selectors.initialState).toEqual({ user: null, auth: { errorMessage: null } })
 })
 
-test('initialResourceState', () => {
-  expect(selectors.initialResourceState).toEqual({
-    list: [],
-    detail: null,
-  })
+test('getUser', () => {
+  expect(selectors.getUser()).toBe(selectors.initialState.user)
+  expect(selectors.getUser(undefined)).toBe(selectors.initialState.user)
+  expect(selectors.getUser(altState)).toBe(altState.user)
 })
 
-test('getResourceState', () => {
-  expect(selectors.getResourceState()).toBe(selectors.initialResourceState)
-  expect(selectors.getResourceState(undefined, 'resources')).toBe(selectors.initialResourceState)
-  expect(selectors.getResourceState(altState, 'resources')).toBe(altState.resources)
+test('getAuthError', () => {
+  expect(selectors.getAuthError()).toBe(selectors.initialState.auth.errorMessage)
+  expect(selectors.getAuthError(undefined)).toBe(selectors.initialState.auth.errorMessage)
+  expect(selectors.getAuthError(altState)).toBe(altState.auth.errorMessage)
 })
 
-test('getList', () => {
-  expect(selectors.getList()).toBe(selectors.initialResourceState.list)
-  expect(selectors.getList({})).toBe(selectors.initialResourceState.list)
-  expect(selectors.getList(undefined, 'resources')).toBe(selectors.initialResourceState.list)
-  expect(selectors.getList(altState, 'resources')).toBe(altState.resources.list)
-})
-
-test('getDetail', () => {
-  expect(selectors.getDetail()).toBe(selectors.initialResourceState.detail)
-  expect(selectors.getDetail({})).toBe(selectors.initialResourceState.detail)
-  expect(selectors.getDetail(undefined, 'resources')).toBe(selectors.initialResourceState.detail)
-  expect(selectors.getDetail(altState, 'resources')).toBe(altState.resources.detail)
-})

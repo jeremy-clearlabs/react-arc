@@ -3,41 +3,31 @@
 import * as actions from './actions'
 
 test('authLoginRequest', () => {
-  expect(actions.authLoginRequest('facebook'))
+  expect(actions.authLoginRequest({ username: 'test', password: 'test' }))
     .toEqual(expect.objectContaining({
       type: actions.AUTH_LOGIN_REQUEST,
       payload: {
-        service: 'facebook',
-      },
-    }))
-  expect(actions.authLoginRequest('facebook', { clientId: 'foo' }))
-    .toEqual(expect.objectContaining({
-      type: actions.AUTH_LOGIN_REQUEST,
-      payload: {
-        service: 'facebook',
-        clientId: 'foo',
+        username: 'test',
+        password: 'test'
       },
     }))
 })
 
 test('authLoginSuccess', () => {
-  expect(actions.authLoginSuccess(1, 'foo')).toEqual({
+  expect(actions.authLoginSuccess({ token: 'abcdf' }, 'foo')).toEqual({
     type: actions.AUTH_LOGIN_SUCCESS,
-    payload: 1,
-    meta: {
-      request: 'foo',
-    },
+    payload: { token: 'abcdf' },
+    meta: 'foo',
   })
 })
 
 test('authLoginFailure', () => {
-  expect(actions.authLoginFailure('test', 'foo')).toEqual({
+  const error = new Error('error');
+  expect(actions.authLoginFailure(error, 'foo')).toEqual({
     type: actions.AUTH_LOGIN_FAILURE,
     error: true,
-    payload: 'test',
-    meta: {
-      request: 'foo',
-    },
+    payload: error,
+    meta: 'foo'
   })
 })
 

@@ -15,7 +15,8 @@
     "prebuild": "npm run build:clean && npm run build:copy",
     "start": "npm run dev",
     "storybook": "start-storybook -p 9001 -c private/storybook",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "jest": {
     "moduleDirectories": [
