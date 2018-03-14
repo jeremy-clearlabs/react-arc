@@ -32,16 +32,14 @@ storiesOf('Themes', module)
       {Object.keys(theme.palette).map(kind => (
         <Block key={randStr()}>
           <Heading>{kind}</Heading>
-          <ul>
+          <Block style={{ display: "flex"}}>
             {theme.palette[kind].map(color => (
-              <li key={randStr()}>
-                <Block>
+              <Block key={randStr()}  style={{ margin: 10}}>
                   <Block style={{ width: 50, height: 50, backgroundColor: color }} />
                   <Label>{color}</Label>
-                </Block>
-              </li>
+              </Block>
             ))}
-          </ul>
+          </Block>
         </Block>
       ))}
     </Block>
