@@ -42,7 +42,7 @@ class LoginForm extends Component {
         ) : null}
         <Field name="username" label="Username" type="text" component={ReduxField} />
         <Field name="password" label="Password" type="password" component={ReduxField} />
-        <Button type="submit" disable={loading}>Login</Button>
+        <Button type="submit" disabled={loading}>Login</Button>
       </Form>
     )
   }

@@ -3,8 +3,9 @@ import { shallow } from 'enzyme'
 import LoginForm from '.'
 
 const handleSubmit = jest.fn()
+const onAuthRedirect = jest.fn()
 
-const wrap = (props = {}) => shallow(<LoginForm handleSubmit={handleSubmit} {...props} />)
+const wrap = (props = {}) => shallow(<LoginForm onAuthRedirect={onAuthRedirect} handleSubmit={handleSubmit} {...props} />)
 
 it('calls renderSubmit when submitted', () => {
   handleSubmit.mockClear()
@@ -14,9 +15,9 @@ it('calls renderSubmit when submitted', () => {
   expect(handleSubmit).toBeCalled()
 })
 
-it('disables button while submitting', () => {
+it('disables button while loading', () => {
   const wrapper = wrap()
   expect(wrapper.find({ disabled: true }).length).toBe(0)
-  wrapper.setProps({ submitting: true })
+  wrapper.setProps({ loading: true })
   expect(wrapper.find({ disabled: true })).toHaveLength(1)
 })

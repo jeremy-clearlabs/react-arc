@@ -9,10 +9,8 @@ export function* loginAuthService(api, options = {}, meta) {
 
   try {
     const data = yield call([api, api.post], '/login', request)
-    console.log('data', data);
     yield put(actions.authLoginSuccess(data, meta))
   } catch (e) {
-    console.log('e', e);
     yield put(actions.authLoginFailure(e, meta))
   }
 }
