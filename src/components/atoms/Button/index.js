@@ -8,12 +8,12 @@ import { ifProp } from 'styled-tools'
 const fontSize = ({ height }) => `${height / 40}rem`
 
 const backgroundColor = ({ transparent, disabled }) =>
-  transparent ? 'transparent' : palette(disabled ? 2 : 1)
+  transparent ? 'transparent' : palette(disabled ? 2 : 0)
 
 const foregroundColor = ({ transparent, disabled }) =>
   transparent ? palette(disabled ? 2 : 1) : palette('grayscale', 0, true)
 
-const hoverBackgroundColor = ({ disabled, transparent }) => !disabled && !transparent && palette(0)
+const hoverBackgroundColor = ({ disabled, transparent }) => !disabled && !transparent && palette(1)
 const hoverForegroundColor = ({ disabled, transparent }) => !disabled && transparent && palette(0)
 
 const styles = css`
@@ -29,7 +29,7 @@ const styles = css`
   cursor: ${ifProp('disabled', 'default', 'pointer')};
   appearance: none;
   padding: 0 1em;
-  border-radius: 0.125em;
+  border-radius: 0.25em;
   box-sizing: border-box;
   pointer-events: ${ifProp('disabled', 'none', 'auto')};
   transition: background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out;

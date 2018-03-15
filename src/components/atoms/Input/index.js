@@ -17,8 +17,8 @@ const styles = css`
   height: ${ifProp({ type: 'textarea' }, 'auto', '2.2222222222em')};
   color: ${palette('grayscale', 0)};
   background-color: ${palette('grayscale', 0, true)};
-  border: 1px solid ${ifProp('invalid', palette('danger', 2), palette('grayscale', 3))};
-  border-radius: 2px;
+  border: 1px solid ${ifProp('invalid', palette('danger', 2), palette('grayscale', 4))};
+  border-radius: 0.25rem;
 
   &[type=checkbox], &[type=radio] {
     display: inline-block;

@@ -10,7 +10,9 @@ const Form = styled.form`
   box-sizing: border-box;
   padding: 1rem;
 `
-
+const FullwidthButton = styled(Button)`
+  width: 100%;
+`
 class LoginForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
@@ -38,11 +40,11 @@ class LoginForm extends Component {
       <Form onSubmit={handleSubmit}>
         <Heading level={2}>Login</Heading>
         {failed ? (
-          <Alert dismissable type="danger">{errorMessage}</Alert>
+          <Alert dismissable variant="danger">{errorMessage}</Alert>
         ) : null}
-        <Field name="username" label="Username" type="text" component={ReduxField} />
-        <Field name="password" label="Password" type="password" component={ReduxField} />
-        <Button type="submit" disabled={loading}>Login</Button>
+        <Field name="username" placeholder="Username" type="text" component={ReduxField} />
+        <Field name="password" placeholder="Password" type="password" component={ReduxField} />
+        <FullwidthButton type="submit" disable={loading}>Login</FullwidthButton>
       </Form>
     )
   }
