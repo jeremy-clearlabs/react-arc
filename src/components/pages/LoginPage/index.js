@@ -1,12 +1,13 @@
 import React from 'react'
 
+import { AuthTemplate } from 'components'
 import { LoginForm } from 'containers'
 
 const LoginPage = () => {
   return (
-    <section>
+    <AuthTemplate>
       <LoginForm />
-    </section>
+    </AuthTemplate>
   )
 }
 
